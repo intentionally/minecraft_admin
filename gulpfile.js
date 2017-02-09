@@ -86,6 +86,7 @@ gulp.task('scripts', function() {
 
     }).map(function(n) {
         return browserify('./src/js/' + n)
+        	.transform('babelify', {presets: ["es2015"]})
           .bundle()
           .pipe(source(n.replace('.js', '') + '.min.js'))
           .pipe(streamify(ngAnnotate()))
