@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # /etc/init.d/ftb
 # version 0.1 2017-02-09
 #
@@ -123,10 +123,10 @@ ftb_stop_countdown() {
     echo "Announcing shutdown..."
     while [ "$COUNT" -gt 0 ]; do
       mc_command "say SHUTDOWN IN $COUNT SECONDS"
-      if [ "$COUNT" -ge 20 ]; then
+      if [[ "$COUNT" -ge 20 ]]; then
         COUNT=$(( COUNT - 10 ))
         sleep 10
-      elif [ "$COUNT" -eq 10 ]; then
+      elif [[ "$COUNT" -eq 10 ]]; then
         COUNT=$(( COUNT - 5 ))
         sleep 5
       else
