@@ -104,7 +104,7 @@ ftb_start_and_wait() {
           printf "[ERROR] $ERVICE not started."
           exit 1
         fi
-        if [ "$ELAPSED" -ge "$VTIMEOUT"]; then
+        if [ "$ELAPSED" -ge "$VTIMEOUT" ]; then
           printf "\n$SERVICE started.\n"
           break 2
         fi
@@ -175,7 +175,7 @@ ftb_reload() {
           printf "[ERROR] $ERVICE not started."
           exit 1
         fi
-        if [ "$ELAPSED" -ge "$VTIMEOUT"]; then
+        if [ "$ELAPSED" -ge "$VTIMEOUT" ]; then
           printf "\n$SERVICE started.\n"
           break 2
         fi
