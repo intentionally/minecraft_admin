@@ -32,7 +32,7 @@ if [ -f "$SERVERDIR/local-settings.sh" ]; then
 fi
 
 BASECMD="$JAVACMD -server -Xms${MIN_RAM} -Xmx${MAX_RAM} -XX:PermSize=${PERMGEN_SIZE} ${JAVA_PARAMETERS} -jar ${FORGEJAR} nogui"
-FULLCMD="cd $SERVERDIR && screen -h $HISTORY -dmS $SERVICE $BASECMD"
+FULLCMD="screen -h $HISTORY -dmS $SERVICE $BASECMD"
 
 as_user() {
   su - "$USERNAME" -c "$1"
@@ -41,16 +41,6 @@ as_user() {
 mc_command() {
   as_user "screen -p 0 -S $SERVICE -X eval 'stuff \"$1\"\015'"
   echo "[MC-CMD] $1"
-}
-
-check_screen() {
-  local SCREENPID=`cat /var/run/${SERVICE}.pid`
-
-  if [ -z "$SCREENPID" ]; then
-    return 1
-  else
-    return 0
-  fi
 }
 
 check_java() {
@@ -64,16 +54,13 @@ check_java() {
 }
 
 ftb_start() {
-  if (check_java && ! check_screen) || (check_screen && ! check_java); then
-    echo "Screen or Java is active without the other. Clean up and rerun."
-    exit 1
-  elif check_java && check_screen; then
+  if check_java; then
     echo "$SERVICE is running"
   else
     echo "Starting $SERVICE..."
     cd $SERVERDIR
     as_user "$FULLCMD"
-    if check_java && check_screen; then
+    if check_java; then
       echo "$SERVICE started."
     else
       echo "[ERROR] $SERVICE not started."
@@ -86,10 +73,7 @@ ftb_start_and_wait() {
   local VTIMEOUT=180
   local ELAPSED=0
 
-  if (check_java && ! check_screen) || (check_screen && ! check_java); then
-    echo "Screen or Java is active without the other. Clean up and rerun."
-    exit 1
-  elif check_java && check_screen; then
+  if check_java; then
     echo "$SERVICE is running"
   else
     echo "Starting $SERVICE..."
@@ -131,10 +115,10 @@ ftb_stop_countdown() {
         sleep 5
       else
         COUNT=$(( COUNT - 1 ))
-        mc_command "save-all"
         sleep 1
       fi
     done
+    mc_command "save-all"
     mc_command "stop"
     sleep 5
   fi
@@ -145,13 +129,11 @@ ftb_stop() {
   local TMPPID=`cat /var/run/${SERVICE}.pid`
 
   ftb_stop_countdown
-  if check_screen; then
-    as_user "screen -S $SERVICE -X quit"
-    rm /var/run/${SERVICE}.pid
-  fi
   if check_java; then
     echo "[ERROR] Failed to stop $SERVICE java process."
     exit 1
+  else
+    as_user "screen -S $SERVICE -X quit"
   fi
 }
 
