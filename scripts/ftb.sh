@@ -1,4 +1,18 @@
 #!/bin/bash
+# /etc/init.d/ftb
+# version 0.1 2017-02-09
+#
+### BEGIN INIT INFO
+# Provides:   ftb
+# Required-Start: $local_fs $remote_fs screen-cleanup
+# Required-Stop: $local_fs $remote_fs
+# Should-Start: $network
+# Should-Stop: $network
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description:    FTB Server
+# Description:    Starts FTB Server
+### END INIT INFO
 
 SERVERDIR='/srv/ftb'
 HISTORY=1024
