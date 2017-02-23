@@ -4,4 +4,81 @@ body {
 	font: 400 16px / 1.25 'Anonymous Pro', sans-serif;
 	margin: 0;
 	padding: 0;
+	-webkit-font-smoothing: antialiased;
+
+	&:before {
+		background: url("/images/bg.svg") repeat-x center bottom / auto 50%;
+		bottom: 0;
+		content: "";
+		display: block;
+		height: 100%;
+		opacity: 0.75;
+		position: fixed;
+		width: 100%;
+		z-index: 1;
+		left: 0;
+	}
+	&:after {
+		background: linear-gradient(to bottom, #111 0%, #111 40%, rgba(0,0,0,0) 60%);
+		content: "";
+		height: 100%;
+		position: fixed;
+		width: 100%;
+		z-index: 2;
+		-webkit-backface-visibility: hidden;
+	}
+
+	&:before, &:after {
+		transform: translate3d(0,0,0);
+	}
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+#branding {
+	color: #111;
+	font-family: 'Bungee Hairline';
+	user-select: none;
+	position: absolute;
+	left: 50%;
+	text-shadow: 0 0 30px #98f1cb;
+	top: 40%;
+	transform: translate3d(-50%, -50%, 0);
+	z-index: 3;
+}
+
+#menu {
+	background: rgba(0, 0, 0, 0.875);
+	margin: 15px;
+	position: relative;
+	z-index: 3;
+
+	ul {
+		height: 100%;
+		list-style: none;
+		margin: 0;
+		padding: 5px;
+		text-align: left;
+
+		a {
+			display: block;
+			padding: 0 3px;
+			text-transform: lowercase;
+			transition: all 100ms ease;
+			user-select: none;
+
+			&:hover, &:focus {
+				color: #98f1cb;
+				text-shadow: 0 0 20px #fff;
+			}
+		}
+	}
+}
+
+section {
+	display: none;
 }

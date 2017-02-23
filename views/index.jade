@@ -1,5 +1,11 @@
 extends layout
 
 block content
-  h1= title
-  a(href="/mods") Download
+	section#mods
+		a.btn(href="/mods") Download
+
+	section#server
+		button.btn(type="button") Restart
+		button.btn(type="button") Murder
+
+	section#admin

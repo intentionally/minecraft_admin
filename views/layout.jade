@@ -1,8 +1,20 @@
 doctype html
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/css/main.css')
-  body
-    block content
-    script(src="/js/main.min.js")
+	head
+		meta(charset='utf-8')
+		meta(name="viewport", content="width=device-width,initial-scale=1")
+		link(rel='stylesheet', href='/css/main.css')
+		title= title
+	body
+		h1#branding &nbsp;voidguard&nbsp;
+		nav#menu(role="navigation")
+			ul
+				li
+					a(href="#mods") Mods
+				li
+					a(href="#server") Server
+
+		main
+			block content
+
+		script(src="/js/main.min.js")

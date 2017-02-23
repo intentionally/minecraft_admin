@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Mods' });
+  res.render('index', { title: 'voidguard admin' });
 });
 
 router.get('/mods', function(req, res, next) {
