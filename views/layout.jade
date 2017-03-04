@@ -7,14 +7,18 @@ html
 		title= title
 	body
 		h1#branding &nbsp;voidguard&nbsp;
-		nav#menu(role="navigation")
-			ul
-				li
-					a(href="#mods") Mods
-				li
-					a(href="#server") Server
+		#wrapper
+			nav#menu(role="navigation")
+				span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002
+				ul
+					li
+						a(href="#mods") Mods
+					li
+						a(href="#server") Server
+				.feedback
+				#menu-input.admin-input(contenteditable="true", tabindex="0")
+				
+			main
+				block content
 
-		main
-			block content
-
-		script(src="/js/main.min.js")
+			script(src="/js/main.min.js")

@@ -28,7 +28,8 @@ var jsHintConfig = {
   loopfunc: true,
   predef: ['define','require'],
   devel: true,
-  browser: true
+  browser: true,
+  esversion: 6,
 };
 
 var env = argv.env || argv.e || 'dev',

@@ -1,3 +1,13 @@
+$start-md: 600px;
+
+%fill {
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
 %wai {
 	display: block;
 	height: 0;

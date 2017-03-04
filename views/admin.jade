@@ -1,14 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Future admin stuff goes here
-  ul
-    li MC server restart
-    li MC murder server
-    li Mod install
-    li Server update
-    li Mod update
-    li MC Logs
-    li MC Console commands
-    li Admin access logs
+	section#server.admin-section
+		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002
+		.feedback
+
+	section#mods.admin-section
+		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002
+		.feedback
