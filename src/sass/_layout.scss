@@ -52,8 +52,18 @@ body {
 
 a {
 	color: #fff;
+	display: inline-block;
+	padding: 0;
 	text-decoration: none;
+	text-transform: lowercase;
+	transition: all 100ms ease;
+	user-select: none;
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
+
+	&:hover, &:focus {
+		color: #98f1cb;
+		text-shadow: 0 0 20px #fff;
+	}
 }
 
 #branding {
@@ -71,6 +81,10 @@ a {
 
 	@media (min-width: $start-md) {
 		font-size: 3rem;
+	}
+
+	a {
+		display: block;
 	}
 }
 
@@ -108,19 +122,6 @@ a {
 		&:before {
 			display: inline-block;
 			content: "admin@ip-109-45-89-458:~$ ls";
-		}
-
-		a {
-			display: block;
-			padding: 0;
-			text-transform: lowercase;
-			transition: all 100ms ease;
-			user-select: none;
-
-			&:hover, &:focus {
-				color: #98f1cb;
-				text-shadow: 0 0 20px #fff;
-			}
 		}
 	}
 }
@@ -188,5 +189,15 @@ a {
 		right: 0;
 		top: 0;
 		width: 7px;
+	}
+}
+
+.command-options {
+	list-style: none;
+	margin: 0 0 0 15px;
+	padding: 0;
+
+	a {
+		width: 7em;
 	}
 }

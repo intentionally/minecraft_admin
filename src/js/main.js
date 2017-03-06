@@ -6,6 +6,8 @@ const menuFocusedClass = 'menu--focused';
 const menuContainer = document.querySelector('#menu');
 const menuInput = document.querySelector('#menu-input');
 
+let activeSection;
+
 const addFeedback = (selector, content) => {
 	document.querySelector(selector).innerHTML += `${adminPrefix + content}<br/>`
 }
@@ -33,9 +35,10 @@ const showSection = selector => {
 	targetSection.classList.remove(sectionHiddenClass);
 	targetSection.setAttribute('tabindex', '0');
 	menu.classList.remove(menuFocusedClass);
-	targetSection.focus();
+	targetSection.querySelector('.admin-input').focus();
 
 	menuInput.innerHTML = '';
+	activeSection = selector.replace('#','');
 	addFeedback('#menu .feedback', selector.replace('#',''));
 
 	setDate(`${selector} .login-date`);
@@ -68,14 +71,39 @@ menuInput.addEventListener('focus', (e) => {
 });
 
 // undo nav type focus
-menu.addEventListener('click', () => {
-	menu.classList.add(menuFocusedClass);
-	menuInput.focus();
+menu.addEventListener('click', (e) => {
+	if (e.target.tagName.toLowerCase() !== 'a') {
+		menu.classList.add(menuFocusedClass);
+		menuInput.focus();
+	}
 });
 
 adminSections.forEach(s => {
 	s.addEventListener('focus', () => menu.classList.remove(menuFocusedClass));
 	s.addEventListener('click', () => menu.classList.remove(menuFocusedClass));
+
+	// bind individual section inputs
+	const commandLinks = Array.prototype.slice.call(s.querySelectorAll('a'));
+	const commands = commandLinks.map(a => a.textContent.replace('--', ''));
+
+	s.querySelector('.admin-input').addEventListener('keypress', (e) => {
+		if (e.keyCode === 13) {
+			e.preventDefault();
+			const content = e.target.textContent;
+			const command = content.split('--')[1];
+
+			if (commands.indexOf(command) >= 0) {
+				addFeedback(`#${s.id} .feedback`, `${content}`);
+			} else {
+				addFeedback(`#${s.id} .feedback`, `${content}<br/>-bash: ${content}: command not found`)
+			}
+			e.target.innerHTML = '';
+		}
+	});
+
+	commandLinks.forEach(c => c.addEventListener('click', () => {
+		addFeedback(`#${s.id} .feedback`, `${activeSection} ${c.textContent}`);
+	}));
 });
 
 // for displaying dates on windows

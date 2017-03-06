@@ -2,9 +2,28 @@ extends layout
 
 block content
 	section#server.admin-section
-		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002
+		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002<br/>
+		| admin@ip-109-45-89-458:~$ server <br/>
+		| Usage: server [options] <br/><br/>
+		| Options:<br/>
+		ul.command-options
+			li<a href="#">--restart</a> restart server
+			li<a href="#">--kill</a> kill server
 		.feedback
+		#server-input.admin-input(
+			contenteditable="true"
+			tabindex="0"
+		)
 
 	section#mods.admin-section
-		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002
+		span(aria-hidden="true") Last login: <span class="login-date"></span> on ttys002<br/>
+		| admin@ip-109-45-89-458:~$ mods
+		| Usage: mods [options] <br/><br/>
+		| Options:<br/>
+		ul.command-options
+			li<a href="#">--download</a> download .zip
 		.feedback
+		#mods-input.admin-input(
+			contenteditable="true"
+			tabindex="0"
+		)
